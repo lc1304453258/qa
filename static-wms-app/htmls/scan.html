@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>扫描二维码</title>
+		<link rel="stylesheet" type="text/css" href="../plugin/mui/css/mui.min.css" />
+		<style type="text/css">
+			body {
+				margin: 0;
+				background-color: #000000;
+			}
+			
+			#bcid {
+				width: 100%;
+				position: absolute;
+				top: 0px;
+				bottom: 44px;
+				text-align: center;
+			}
+			
+			.tip {
+				color: #FFFFFF;
+				font-weight: bold;
+				text-shadow: 0px -1px #103E5C;
+			}
+			
+			footer {
+				width: 100%;
+				height: 44px;
+				position: absolute;
+				bottom: 0px;
+				line-height: 44px;
+				text-align: center;
+				color: #000;
+			}
+			
+			.fbt {
+				width: 50%;
+				height: 100%;
+				background-color: #FAFAFA;
+				float: left;
+			}
+			
+			.fbt:active {
+				-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
+				box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.5);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="bcid">
+			<div style="height:40%"></div>
+			<p class="tip">正在打开摄像头...</p>
+			<p class="tip">请确保程序有打开摄像头的权限(设置-权限管理-资产管理-信任)</p>
+		</div>
+		<footer>
+			<div class="fbt" onclick="back()">取消</div>
+			<div id="btn-flash" class="fbt" onclick="switchFlash()">打开闪光灯</div>
+		</footer>
+		<script src="../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var currentWebview = null;
+			var scan = null;
+			var domready = false;
+			
+			/**
+			 * 显示扫描窗口
+			 */
+			function plusReady() {
+				if(currentWebview || !window.plus || !domready) {
+					return;
+				}
+				// 获取窗口对象
+				currentWebview = plus.webview.currentWebview();
+				// 开始扫描
+				currentWebview.addEventListener('show', function() {
+					scan = new plus.barcode.Barcode('bcid', [plus.barcode.QR, plus.barcode.EAN8, plus.barcode.EAN13, plus.barcode.CODE128], {
+						frameColor: '#00FF00',
+						scanbarColor: '#00FF00'
+					});
+					scan.onmarked = onmarked;
+					scan.start();
+				});
+				// 显示页面并关闭等待框
+				currentWebview.show("pop-in");
+			}
+			
+			if(window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", plusReady, false);
+			}
+			
+			// 监听DOMContentLoaded事件
+			document.addEventListener("DOMContentLoaded", function() {
+				domready = true;
+				plusReady();
+			}, false);
+			
+			
+			/**
+			 * 二维码扫描成功事件
+			 * 获取打开二维码扫描事件的页面
+			 * 触发页面的sendScanData方法
+			 * @param {Object} type
+			 * @param {Object} result
+			 */
+			function onmarked(type, result) {
+				scan.cancel();
+				var opener = plus.webview.currentWebview().opener();
+				mui.fire(opener, "sendScanData", {
+					barCode: result
+				});
+				
+				plus.webview.currentWebview().close();
+			}
+
+			/**
+			 * 开启/关闭闪光灯
+			 */
+			function switchFlash() {
+				var btnFlash = document.getElementById("btn-flash");
+				if(btnFlash.innerHTML == "打开闪光灯") {
+					scan.setFlash(true);
+					btnFlash.innerHTML = "关闭闪光灯";
+				} else {
+					scan.setFlash(false);
+					btnFlash.innerHTML = "打开闪光灯";
+				}
+			}
+
+			/**
+			 * 返回上一个界面
+			 */
+			function back() {
+				plus.webview.currentWebview().close();
+			}
+		</script>
+	</body>
+
+</html>

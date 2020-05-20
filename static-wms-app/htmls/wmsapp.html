@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no;">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+  <title>WMSAPP</title>
+  <link rel="stylesheet" href="../static-wms-app/css/select2.css" type="text/css" />
+  <link rel="stylesheet" href="../static-wms-app/css/select2.min.css" type="text/css" />
+
+
+  <link rel="stylesheet" href="../static-wms-app/css/mes-app.css" type="text/css" />
+  <link rel="stylesheet" href="../static-wms-app/css/tether.min.css" type="text/css" />
+  <link rel="stylesheet" href="../static-wms-app/css/bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="../static-wms-app/css/jquery.mloading.css" type="text/css" />
+  <link rel="stylesheet" href="../static-wms-app/css/font-awesome.min.css" type="text/css" />
+
+  <!-- <link rel="stylesheet" href="../static-wms-app/plugin/mui/css/mui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../static-wms-app/plugin/mui/css/img-preview.css" type="text/css" />
+  <link rel="stylesheet" href="../static-wms-app/plugin/mui/css/mui.picker.css" type="text/css" />
+  <link rel="stylesheet" href="../static-wms-app/plugin/mui/css/mui.picker.min.css" type="text/css" />
+  <link rel="stylesheet" href="../static-wms-app/plugin/mui/css/mui.poppicker.css" type="text/css" /> -->
+
+
+  <script type="text/javascript" src="../static-wms-app/js/jquery.min.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/jquery.cookie.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/jquery.mloading.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/tether.min.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/bootstrap.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/es6-promise.auto.min.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/moment.min.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/moment.zh-cn.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/BluetoothPrinterApi.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/ZXingScannerApi.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/RfidMiddlewareApi.js"></script>
+
+  <!-- <script type="text/javascript" src="../static-wms-app/plugin/mui/js/mui.min.js"></script>
+  <script type="text/javascript" src="../static-wms-app/plugin/mui/js/mui.picker.js"></script>
+  <script type="text/javascript" src="../static-wms-app/plugin/mui/js/mui.picker.min.js"></script>
+  <script type="text/javascript" src="../static-wms-app/plugin/mui/js/mui.poppicker.js"></script>
+  <script type="text/javascript" src="../static-wms-app/plugin/mui/js/mui.previewimage.js"></script>
+  <script type="text/javascript" src="../static-wms-app/plugin/mui/js/mui.zoom.js"></script>
+  <script type="text/javascript" src="../static-wms-app/plugin/mui/js/mui.pullToRefresh.js"></script>
+  <script type="text/javascript" src="../static-wms-app/plugin/mui/js/mui.pullToRefresh.material.js"></script> -->
+
+  <!-- <script type="text/javascript" src="../static-wms-app/js/select2.js"></script> -->
+  <script type="text/javascript" src="../static-wms-app/js/select2.min.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/select2.zh-CN.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/print.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/SettingApi.js"></script>
+  <script type="text/javascript" src="../static-wms-app/js/BluetoothConfigApi.js"></script>
+</head>
+
+<body data-spy="scroll">
+  <div id="app"></div>
+  <div id="mainDiv"></div>
+
+  <!--微信JS-SDK-->
+  <!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script> -->
+  <script type="text/javascript">
+    // bug fixed by jack
+    // VUE 在 nav 上动态绑定的样式不能生效，原因是受到bootstrap scrollspy 插件的影响
+    // 在这边只有设置了spy-active的元素才可以被 scrollspy 管理。
+    $('body').scrollspy({ target: '.spy-active' });
+  </script>
+</body>
+
+</html>
